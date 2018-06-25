@@ -26,6 +26,7 @@ ul#ui-id-1 {
 #map{
     position: relative !important;
     z-index: 0 !important;
+    display: block !important; 
 }
 </style>
 
@@ -62,13 +63,13 @@ ul#ui-id-1 {
               
             </div>
             
-            <div class="col-md-4 p-0 pr-15">
+            <div class="col-md-4 p-0 m-0">
                 <div id="map" style="width: 100%;"></div>
                 
                 @if($organization->organization_locations!='')
                   <hr>
                   @foreach($organization->location as $location)
-                  <div class="panel m-0 mt-5">
+                  <div class="panel m-0 mt-5 mb-10">
                       <div class="panel-body p-20">
 
                           <h4><span class="badge bg-red">Location:</span> {{$location->location_name}}</h4>
