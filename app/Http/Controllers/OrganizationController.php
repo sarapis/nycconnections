@@ -50,7 +50,7 @@ class OrganizationController extends Controller
 
                 $organization->organization_url = str_replace("https://","",$organization->organization_url);
                 $organization->organization_url = str_replace("http://","",$organization->organization_url);
-                
+
                 $organization->organization_legal_status = isset($record['fields']['legal_status'])?$record['fields']['legal_status']:null;
                 $organization->organization_tax_status = isset($record['fields']['tax_status'])?$record['fields']['tax_status']:null;
                 $organization->organization_legal_status = isset($record['fields']['legal_status'])?$record['fields']['legal_status']:null;
@@ -172,11 +172,16 @@ class OrganizationController extends Controller
         $chip_title = 'Category:';
         $organizations = Organization::where('organization_x_chapter', '=', $id)->orderBy('organization_name')->paginate(10);
 
-        $organization_ids_array = Organization::where('organization_x_chapter', '=', $id)->pluck('organization_recordid')->toArray();
+        $organization_ids_array = Organization::where('organization_x_chapter', '=', $id)->orderBy('organization_recordid')->pluck('organization_recordid')->toArray();
+
+        // var_dump($organization_ids_array);
+        // exit();
+        
         $organization_ids = join(', ', $organization_ids_array);
 
+        $locations = Location::with('organization')->whereIn('location_organization', $organization_ids_array)->get();
 
-        $locations = Location::with('organization')->whereIn('location_organization', [$organization_ids])->get();
+
 
         return view('frontEnd.chip', compact('organizations', 'locations', 'chip_title', 'chip_name'));
     }
