@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-Services
+Organizations
 @stop
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
@@ -41,26 +41,19 @@ ul#ui-id-1 {
             </div>
             <div class="col-md-12 p-0">
                 <div class="col-md-8 pt-15 pr-0">
-                    @foreach($services as $service)
-                    
+                    @foreach($organizations as $organization)
+
                     <div class="panel content-panel">
                         <div class="panel-body p-20">
-                            <a class="panel-link" href="/service_{{$service->service_recordid}}">{{$service->service_name}}</a>
-                            @if($service->service_taxonomy!=0)
-                            <h4><span class="badge bg-red">Category:</span> <a class="panel-link" href="/category_{{$service->taxonomy()->first()->taxonomy_recordid}}">{{$service->taxonomy()->first()->taxonomy_name}}</a></h4>
-                            @endif
-                            @if($service->service_organization!=null)
-                            <h4><span class="badge bg-red">Organization:</span><a class="panel-link" href="/organization_{{$service->organization()->first()->organization_recordid}}"> {{$service->organization()->first()->organization_name}}</a></h4>
-                            @endif
-                            <h4><span class="badge bg-red">Phone:</span> @foreach($service->phone as $phone) {!! $phone->phone_number !!} @endforeach</h4>
-                            <h4><span class="badge bg-blue">Address:</span>
-                                @if($service->service_address!=NULL)
-                                    @foreach($service->address as $address)
-                                      {{ $address->address_1 }}
-                                    @endforeach
-                                @endif
-                            </h4>
-                            <h4><span class="badge bg-blue">Description:</span> {!! str_limit($service->service_description, 200) !!}</h4>
+                            
+                        <a class="panel-link" href="/organization_{{$organization->organization_recordid}}">{{$organization->organization_name}}</a>
+                        @if($organization->organization_x_chapter!=NULL)
+                        <h4><span class="badge bg-red">Category:</span> <a class="panel-link" href="/category_{{$organization->taxonomy()->first()->taxonomy_recordid}}">{{$organization->taxonomy()->first()->taxonomy_name}}</a></h4>
+                        @endif
+
+                        <h4><span class="badge bg-red">Phone:</span> @foreach($organization->phone as $phone) {!! $phone->phone_number !!} @endforeach</h4>
+
+                        <h4><span class="badge bg-blue">Description:</span> {!! str_limit($organization->organization_description, 200) !!}</h4>
                         </div>
                     </div>
                     @endforeach
@@ -75,21 +68,6 @@ ul#ui-id-1 {
     </div>
 </div>
 
-<!-- <script>
-    $(document).ready(function(){
-        if(screen.width < 768){
-          var text= $('.navbar-header').css('height');
-          var height = text.slice(0, -2);
-          $('.page').css('padding-top', height);
-          $('#content').css('top', height);
-        }
-        else{
-          var text= $('.navbar-header').css('height');
-          var height = 0;
-          $('.page').css('margin-top', height);
-        }
-    });
-</script> -->
 <script>
     
     var locations = <?php print_r(json_encode($locations)) ?>;
@@ -117,12 +95,12 @@ ul#ui-id-1 {
         avglat = 40.730981;
         avglng = -73.998107;
     }
-    // console.log(avglat);
+    // console.log(avglng);
     var mymap = new GMaps({
       el: '#map',
       lat: avglat,
       lng: avglng,
-      zoom:12
+      zoom:5
     });
 
 
@@ -133,11 +111,10 @@ ul#ui-id-1 {
 
                 lat: value.location_latitude,
                 lng: value.location_longitude,
-                title: value.city,
                        
                 infoWindow: {
                     maxWidth: 250,
-                    content: ('<a href="/service_'+value.services[0].service_recordid+'" style="color:#428bca;font-weight:500;font-size:14px;">'+value.services[0].service_name+'</a><br><p>'+value.organization.organization_name+'</p>')
+                    content: ('<a href="/organization_'+value.organization.organization_recordid+'" style="color:#428bca;font-weight:500;font-size:14px;">'+value.organization.organization_name+'</a>')
                 }
             });
         }

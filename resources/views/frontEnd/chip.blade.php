@@ -46,20 +46,14 @@ ul#ui-id-1 {
                     <div class="panel content-panel">
                         <div class="panel-body p-20">
                             
-                            <a class="panel-link" href="/organization_{{$organization->organization_recordid}}">{{$organization->organization_name}}</a>
-                            @if($organization->organization_taxonomy!=0)
-                            <h4><span class="badge bg-red">Category:</span> <a class="panel-link" href="/category_{{$organization->taxonomy()->first()->taxonomy_recordid}}">{{$organization->taxonomy()->first()->taxonomy_name}}</a></h4>
-                            @endif
+                        <a class="panel-link" href="/organization_{{$organization->organization_recordid}}">{{$organization->organization_name}}</a>
+                        @if($organization->organization_x_chapter!=NULL)
+                        <h4><span class="badge bg-red">Category:</span> <a class="panel-link" href="/category_{{$organization->taxonomy()->first()->taxonomy_recordid}}">{{$organization->taxonomy()->first()->taxonomy_name}}</a></h4>
+                        @endif
 
-                            <h4><span class="badge bg-red">Phone:</span> @foreach($organization->phone as $phone) {!! $phone->phone_number !!} @endforeach</h4>
-                            <!-- <h4><span class="badge bg-blue">Address:</span>
-                                @if($organization->organization_address!=NULL)
-                                    @foreach($organization->address as $address)
-                                      {{ $address->address_1 }}
-                                    @endforeach
-                                @endif
-                            </h4> -->
-                            <h4><span class="badge bg-blue">Description:</span> {!! str_limit($organization->organization_description, 200) !!}</h4>
+                        <h4><span class="badge bg-red">Phone:</span> @foreach($organization->phone as $phone) {!! $phone->phone_number !!} @endforeach</h4>
+
+                        <h4><span class="badge bg-blue">Description:</span> {!! str_limit($organization->organization_description, 200) !!}</h4>
                         </div>
                     </div>
                     @endforeach
@@ -94,7 +88,7 @@ ul#ui-id-1 {
 <script>
     
     var locations = <?php print_r(json_encode($locations)) ?>;
-    console.log(locations);
+    // console.log(locations);
 
     var sumlat = 0.0;
     var sumlng = 0.0;
@@ -118,7 +112,7 @@ ul#ui-id-1 {
         avglat = 40.730981;
         avglng = -73.998107;
     }
-    console.log(avglng);
+    // console.log(avglng);
     var mymap = new GMaps({
       el: '#map',
       lat: avglat,

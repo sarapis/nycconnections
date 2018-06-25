@@ -83,7 +83,7 @@ Home
                                   
                               </div>
                               <button type="submit" class="btn btn_findout"><h4 class="text-white mb-0">Search</h4></button>
-                               <a href="/services_near_me" class="btn btn_findout pull-right"><h4 class="text-white mb-0">Organizations Near Me</h4></a>
+                               <a href="/organizations_near_me" class="btn btn_findout pull-right"><h4 class="text-white mb-0">Organizations Near Me</h4></a>
                             </form>
                         </div>
                     </div>
@@ -145,7 +145,7 @@ $(function () {
         select: selectItem,
         minLength: 2,
         change: function() {
-            console.log(selectItem);
+            // console.log(selectItem);
 
         }
     });

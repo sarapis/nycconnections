@@ -10,6 +10,8 @@ use App\Location;
 use App\Taxonomy;
 use App\Airtables;
 use App\Services\Stringtoint;
+use Geolocation;
+use Geocode;
 
 class OrganizationController extends Controller
 {
@@ -45,6 +47,10 @@ class OrganizationController extends Controller
 
                 $organization->organization_email = isset($record['fields']['email'])?$record['fields']['email']:null;
                 $organization->organization_url = isset($record['fields']['url'])?$record['fields']['url']:null;
+
+                $organization->organization_url = str_replace("https://","",$organization->organization_url);
+                $organization->organization_url = str_replace("http://","",$organization->organization_url);
+                
                 $organization->organization_legal_status = isset($record['fields']['legal_status'])?$record['fields']['legal_status']:null;
                 $organization->organization_tax_status = isset($record['fields']['tax_status'])?$record['fields']['tax_status']:null;
                 $organization->organization_legal_status = isset($record['fields']['legal_status'])?$record['fields']['legal_status']:null;

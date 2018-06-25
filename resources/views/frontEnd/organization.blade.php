@@ -49,7 +49,7 @@ ul#ui-id-1 {
 
                         <h4 class="panel-text"><span class="badge bg-red">Description:</span> {{$organization->organization_description}}</h4>
 
-                        <h4 class="panel-text"><span class="badge bg-red">Website</span> {{$organization->organization_url}}</h4>
+                        <h4 class="panel-text"><span class="badge bg-red">Website</span> <a class="panel-link" href="http://{{$organization->organization_url}}" target="_blank">{{$organization->organization_url}}</a></h4>
 
                         @if($organization->organization_phones!='')
                         <h4 class="panel-text"><span class="badge bg-red">Main Phone:</span> @foreach($organization->phone as $phone)
@@ -59,32 +59,6 @@ ul#ui-id-1 {
 
                     </div>
                   </div>
-
-                  @if($organization->organization_services!='')
-                    @foreach($organization->service as $service)
-                    <div class="panel content-panel">
-                        <div class="panel-body p-20">
-
-                            <h4><span class="badge bg-red">Service:</span><a class="panel-link" href="/service_{{$service->service_recordid}}"> {{$service->service_name}}</a></h4>
-
-                            <h4><span class="badge bg-red">Category:</span><a class="panel-link" href="/category_{{$service->taxonomy()->first()->taxonomy_recordid}}"> {{$service->taxonomy()->first()->taxonomy_name}}</a></h4>
-
-                            <h4><span class="badge bg-red">Oragnization:</span><a class="panel-link" href="/organization_{{$service->organization()->first()->organization_recordid}}"> {{$service->organization()->first()->organization_name}}</a></h4>
-
-
-                            <h4><span class="badge bg-red">Phone:</span> @foreach($service->phone as $phone) {!! $phone->phone_number !!} @endforeach</h4>
-                            <h4><span class="badge bg-blue">Address:</span>
-                                @if($service->service_address!=NULL)
-                                    @foreach($service->address as $address)
-                                      {{ $address->address_1 }}
-                                    @endforeach
-                                @endif
-                            </h4>
-                            <h4><span class="badge bg-blue">Description:</span> {!! str_limit($service->service_description, 200) !!}</h4>
-                        </div>
-                    </div>
-                    @endforeach
-                  @endif
               
             </div>
             

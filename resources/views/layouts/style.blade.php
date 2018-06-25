@@ -7,7 +7,7 @@
 <!--   <meta name="description" content="bootstrap admin template"> -->
   <meta name="author" content="">
   <meta name="_token" content="{!! csrf_token() !!}" />
-  <title>@yield('title')| Nycconections.sarapis.org</title>
+  <title>@yield('title')| Nycservices.sarapis</title>
   <link rel="apple-touch-icon" href="../../frontend/assets/images/apple-touch-icon.png">
   <link rel="shortcut icon" href="../../frontend/assets/images/favicon.ico">
   <!-- Stylesheets -->
@@ -53,7 +53,7 @@
   <!-- Scripts -->
   
 <!--   <script src="../../../frontend/global/vend/jquery/jquery.js"></script> -->
- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+ <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <script type="text/javascript" src="../../js/jquery.jticker.js"></script>
 <script type="text/javascript">

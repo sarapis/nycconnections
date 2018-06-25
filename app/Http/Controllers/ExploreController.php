@@ -38,21 +38,21 @@ class ExploreController extends Controller
         // $lat =37.3422;
         // $lng = -121.905;
 
-        $locations = Location::with('services', 'organization')->select(DB::raw('*, ( 3959 * acos( cos( radians('.$lat.') ) * cos( radians( location_latitude ) ) * cos( radians( location_longitude ) - radians('.$lng.') ) + sin( radians('.$lat.') ) * sin( radians( location_latitude ) ) ) ) AS distance'))
+        $locations = Location::with('organization')->select(DB::raw('*, ( 3959 * acos( cos( radians('.$lat.') ) * cos( radians( location_latitude ) ) * cos( radians( location_longitude ) - radians('.$lng.') ) + sin( radians('.$lat.') ) * sin( radians( location_latitude ) ) ) ) AS distance'))
         ->having('distance', '<', 2)
         ->orderBy('distance')
         ->get();
 
-        $services = [];
+        $organizations = [];
         foreach ($locations as $key => $location) {
             
             $values = Organization::where('organization_locations', 'like', '%'.$location->location_recordid.'%')->get();
             foreach ($values as $key => $value) {
-                $services[] = $value;
+                $organizations[] = $value;
             }
         }
         
-        return view('frontEnd.near', compact('services','locations', 'chip_title', 'chip_name'));
+        return view('frontEnd.near', compact('organizations','locations', 'chip_title', 'chip_name'));
     }
 
     public function geocode(Request $request)
@@ -84,16 +84,16 @@ class ExploreController extends Controller
         ->orderBy('distance')
         ->get();
 
-        $services = [];
+        $organizations = [];
         foreach ($locations as $key => $location) {
             
-            $values = Service::where('service_locations', 'like', '%'.$location->location_recordid.'%')->get();
+            $values = Organization::where('organization_locations', 'like', '%'.$location->location_recordid.'%')->get();
             foreach ($values as $key => $value) {
-                $services[] = $value;
+                $organizations[] = $value;
             }
         }
         
-        return view('frontEnd.near', compact('services','locations', 'chip_title', 'chip_name'));
+        return view('frontEnd.near', compact('organizations','locations', 'chip_title', 'chip_name'));
 
     }
     public function index(Request $request)

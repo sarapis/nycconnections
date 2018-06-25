@@ -90,7 +90,7 @@ ul#ui-id-1 {
         avglat = 40.730981;
         avglng = -73.998107;
     }
-    console.log(avglng);
+    // console.log(avglng);
     var mymap = new GMaps({
       el: '#map',
       lat: avglat,
