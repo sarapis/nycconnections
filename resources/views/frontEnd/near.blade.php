@@ -100,7 +100,7 @@ ul#ui-id-1 {
       el: '#map',
       lat: avglat,
       lng: avglng,
-      zoom:10
+      zoom:14
     });
 
 
