@@ -39,7 +39,7 @@
             </li>
 
             <li class="option-side">
-                <button class="btn btn-block waves-effect waves-classic" style="padding: 0;background: #A2E9FF;"><a href="/organizations_near_me" style="display: block;padding-left: 10px;">Organizations Near Me</a></button>
+                <button class="btn btn-block waves-effect waves-classic" style="padding: 0;background: #A2E9FF;"><a href="/organizations_near_me" style="display: block;padding-left: 10px;">Near Me</a></button>
             </li> 
                     
             <li class="option-side">
